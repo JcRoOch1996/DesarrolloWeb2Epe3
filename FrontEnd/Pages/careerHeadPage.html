@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlaza el archivo CSS de Bootstrap para aplicar estilos prediseñados -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Enlaza jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Enlaza el archivo JS de Bootstrap para funcionalidades interactivas -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Enlaza el archivo de estilo para la pagina -->
+    <link rel="stylesheet" href="../Styles/styles.css" />
+    <title>Página del Jefe de Carrera</title>
+</head>
+
+<body>
+
+    <div class="container-fluid mt-5">
+        <h1><strong>PÁGINA DEL JEFE DE CARRERA</strong></h1>
+    </div>
+
+    <!-- Contenedor de pestañas -->
+    <div class="tab-container">
+        <!-- Cabecera con las pestañas -->
+        <div class="tab-header">
+            <button class="tab-link active" onclick="openTab(event, 'tab1')">Datos De La Carrera</button>
+            <button class="tab-link" onclick="openTab(event, 'tab2')">Sistema de Gestión de Cursos</button>
+            <button class="tab-link" onclick="openTab(event, 'tab3')">Sistema de Gestión de Alumnos</button>
+            <button class="tab-link" onclick="openTab(event, 'tab4')">Sistema de Gestión de Profesores</button>
+            <button class="tab-link" onclick="openTab(event, 'tab5')">Sistema de Gestión de Asignaturas</button>
+        </div>
+
+        <!-- Contenido de la Pestaña 1: Guía de Carreras Inscritas -->
+        <div id="tab1" class="tab-content active">
+            <div class="container-fluid mt-5">
+                <h2><strong>Datos De La Carrera</strong></h2>
+                <br />
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id Carrera</th>
+                                <th>Código De Carrera</th>
+                                <th>Nombre De carrera</th>
+                            </tr>
+                        </thead>
+                        <tbody id="CareerList">
+                            <!-- Aquí se cargarán dinámicamente las carreras -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido de la Pestaña 2: Sistema de Gestión de Cursos -->
+        <div id="tab2" class="tab-content">
+            <div class="container-fluid mt-5">
+                <h2><strong>SISTEMA DE GESTIÓN DE CURSOS</strong></h2>
+                <br />
+                <!-- Botón para añadir nuevo curso -->
+                <button class="btn btn-primary mb-3" id="addCourseBtn">Añadir Curso</button>
+                <!-- Modal para añadir o editar curso -->
+                <div class="modal fade" id="CourseModal" tabindex="-1" aria-labelledby="CourseModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="CourseModalLabel">Añadir Curso</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="CourseForm">
+                                    <input type="hidden" id="id" />
+                                    <div class="mb-3">
+                                        <label for="course_code" class="form-label">Código De Curso</label>
+                                        <input type="text" class="form-control" id="course_code" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="course_name" class="form-label">Nombre De Curso</label>
+                                        <input type="text" class="form-control" id="course_name" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="career_id" class="form-label">Id Carrera</label>
+                                        <input type="text" class="form-control" id="career_id" required />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tabla para mostrar los cursos -->
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id Curso</th>
+                                <th>Código De Curso</th>
+                                <th>Nombre De Curso</th>
+                                <th>Id Carrera</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="CourseList">
+                            <!-- Aquí se cargarán dinámicamente los cursos -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido de la Pestaña 3: Sistema de Gestión de Alumnos -->
+        <div id="tab3" class="tab-content">
+            <div class="container-fluid mt-5">
+                <h2><strong>SISTEMA DE GESTIÓN DE ALUMNOS</strong></h2>
+                <br />
+                <!-- Botón para añadir nuevo alumno -->
+                <button class="btn btn-primary mb-3" id="addAlumnoBtn">Añadir Nuevo Alumno</button>
+
+                <!-- Modal para añadir o editar alumno -->
+                <div class="modal fade" id="alumnoModal" tabindex="-1" aria-labelledby="alumnoModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="alumnoModalLabel">Añadir Nuevo Alumno</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="alumnoForm">
+                                    <!-- Campo para Rut -->
+                                    <div class="mb-3">
+                                        <label for="alumno_rut" class="form-label">Rut</label>
+                                        <input type="text" class="form-control" id="alumno_rut" required />
+                                    </div>
+
+                                    <!-- Campo para Nombres -->
+                                    <div class="mb-3">
+                                        <label for="alumno_nombres" class="form-label">Nombres</label>
+                                        <input type="text" class="form-control" id="alumno_nombres" required />
+                                    </div>
+
+                                    <!-- Campo para Apellidos -->
+                                    <div class="mb-3">
+                                        <label for="alumno_apellidos" class="form-label">Apellidos</label>
+                                        <input type="text" class="form-control" id="alumno_apellidos" required />
+                                    </div>
+
+                                    <!-- Campo para Fecha de Nacimiento -->
+                                    <div class="mb-3">
+                                        <label for="alumno_fecha_nacimiento" class="form-label">Fecha de
+                                            Nacimiento</label>
+                                        <input type="date" class="form-control" id="alumno_fecha_nacimiento" required />
+                                    </div>
+
+                                    <!-- Campo para Género -->
+                                    <div class="mb-3">
+                                        <label for="alumno_genero" class="form-label">Género</label>
+                                        <select class="form-select" id="alumno_genero" required>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino">Femenino</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Campo para Email -->
+                                    <div class="mb-3">
+                                        <label for="alumno_email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="alumno_email" required />
+                                    </div>
+
+                                    <!-- Campo para Contraseña -->
+                                    <div class="mb-3">
+                                        <label for="alumno_contrasena" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="alumno_contrasena" required />
+                                    </div>
+
+                                    <!-- Campo para Rol -->
+                                    <div class="mb-3">
+                                        <label for="alumno_rol" class="form-label">Rol</label>
+                                        <select class="form-select" id="alumno_rol" required>
+                                            <option value="Estudiante">Estudiante</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Campo para Id de Curso -->
+                                    <div class="mb-3">
+                                        <label for="alumno_curso_id" class="form-label">Id del Curso</label>
+                                        <input type="number" class="form-control" id="alumno_curso_id" required />
+                                    </div>
+
+                                    <!-- Botón para guardar -->
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla para mostrar los alumnos -->
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Rut</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Género</th>
+                                <th>Email</th>
+                                <th>Contraseña</th>
+                                <th>Rol</th>
+                                <th>Id Curso</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alumnoList">
+                            <!-- Aquí se cargarán dinámicamente los alumnos -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+         <!-- Contenido de la Pestaña 4: Sistema de Gestión de Profesores -->
+         <div id="tab4" class="tab-content">
+            <div class="container-fluid mt-5">
+                <h2><strong>SISTEMA DE GESTIÓN DE PROFESORES</strong></h2>
+                <br />
+                <!-- Botón para añadir nuevo profesor -->
+                <button class="btn btn-primary mb-3" id="addProfesorBtn">Añadir Nuevo Profesor</button>
+
+                <!-- Modal para añadir o editar profesor -->
+                <div class="modal fade" id="ProfesorModal" tabindex="-1" aria-labelledby="ProfesorModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ProfesorModalLabel">Añadir Nuevo Profesor</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="ProfesorForm">
+                                    <!-- Campo para Rut -->
+                                    <div class="mb-3">
+                                        <label for="profesor_rut" class="form-label">Rut</label>
+                                        <input type="text" class="form-control" id="profesor_rut" required />
+                                    </div>
+
+                                    <!-- Campo para Nombres -->
+                                    <div class="mb-3">
+                                        <label for="profesor_nombres" class="form-label">Nombres</label>
+                                        <input type="text" class="form-control" id="profesor_nombres" required />
+                                    </div>
+
+                                    <!-- Campo para Apellidos -->
+                                    <div class="mb-3">
+                                        <label for="profesor_apellidos" class="form-label">Apellidos</label>
+                                        <input type="text" class="form-control" id="profesor_apellidos" required />
+                                    </div>
+
+                                    <!-- Campo para Fecha de Nacimiento -->
+                                    <div class="mb-3">
+                                        <label for="profesor_fecha_nacimiento" class="form-label">Fecha de
+                                            Nacimiento</label>
+                                        <input type="date" class="form-control" id="profesor_fecha_nacimiento"
+                                            required />
+                                    </div>
+
+                                    <!-- Campo para Género -->
+                                    <div class="mb-3">
+                                        <label for="profesor_genero" class="form-label">Género</label>
+                                        <select class="form-select" id="profesor_genero" required>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino">Femenino</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Campo para Email -->
+                                    <div class="mb-3">
+                                        <label for="profesor_email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="profesor_email" required />
+                                    </div>
+
+                                    <!-- Campo para Contraseña -->
+                                    <div class="mb-3">
+                                        <label for="profesor_contrasena" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="profesor_contrasena" required />
+                                    </div>
+
+                                    <!-- Campo para Rol -->
+                                    <div class="mb-3">
+                                        <label for="profesor_rol" class="form-label">Rol</label>
+                                        <select class="form-select" id="profesor_rol" required>
+                                            <option value="Profesor">Profesor</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Botón para guardar -->
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla para mostrar los profesores -->
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Rut</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Género</th>
+                                <th>Email</th>
+                                <th>Contraseña</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ProfesorList">
+                            <!-- Aquí se cargarán dinámicamente los profesores -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+         <!-- Contenido de la Pestaña 5: Sistema de Gestión de Asignaturas -->
+        <div id="tab5" class="tab-content">
+            <div class="container-fluid mt-5">
+                <h2><strong>SISTEMA DE GESTIÓN DE ASIGNATURAS</strong></h2>
+                <br />
+                <!-- Botón para añadir nuevas asignaturas -->
+                <button class="btn btn-primary mb-3" id="addSubjectBtn">Añadir Asignatura</button>
+                <!-- Modal para añadir o editar asignaturas -->
+                <div class="modal fade" id="SubjectModal" tabindex="-1" aria-labelledby="SubjectModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="SubjectModalLabel">Añadir Asignatura</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="SubjectForm">
+                                    <input type="hidden" id="id" />
+                                    <div class="mb-3">
+                                        <label for="subject_code" class="form-label">Código De Asignatura</label>
+                                        <input type="text" class="form-control" id="subject_code" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="subject_name" class="form-label">Nombre De Asignatura</label>
+                                        <input type="text" class="form-control" id="subject_name" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="profesorId" class="form-label">Rut Profesor A Cargo</label>
+                                        <input type="text" class="form-control" id="profesorId" required />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tabla para mostrar las asignaturas -->
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id Asignatura</th>
+                                <th>Código De Asignatura</th>
+                                <th>Nombre De Asignatura</th>
+                                <th>Rut Profesor A Cargo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="SubjectList">
+                            <!-- Aquí se cargarán dinámicamente las asginaturas -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
+
+    <!-- boton para el cierre de sesion-->
+
+    <div class="logout-container">
+        <button class="btn btn-secondary mb-3" id="logoutBtn">
+            Cerrar Sesión
+        </button>
+    </div>
+
+    <!-- importacion de los scripts utilizados por la pagina -->
+
+    <script src="../Scripts/careerHead/career-heads-careers-resume.js"></script>
+    <script src="../Scripts/careerHead/career-heads-course-manager.js"></script>
+    <script src="../Scripts/careerHead/career-heads-students-manager.js"></script>
+    <script src="../Scripts/careerHead/career-head-profesor-manager.js"></script>
+    <script src="../Scripts/careerHead/career-heads-subjects-manager.js"></script>
+    <script src="../Scripts/shared/logout.js"></script>
+    <script src="../Scripts/shared/script.js"></script>
+</body>
+
+</html>

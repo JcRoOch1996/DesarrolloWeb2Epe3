@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlaza el archivo CSS de Bootstrap para aplicar estilos prediseñados -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Enlaza jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Enlaza el archivo JS de Bootstrap para funcionalidades interactivas -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Enlaza el archivo de estilo para la pagina -->
+    <link rel="stylesheet" href="../Styles/styles.css" />
+    <title>Pagina Del Administrador</title>
+</head>
+
+<body>
+
+    <!-- Contenedor principal -->
+    <div class="container-fluid mt-5">
+        <h1>Pagina Del Administrador</h1>
+    </div>
+
+    <!-- Contenedor de pestañas -->
+    <div class="tab-container">
+        <!-- Cabecera con las pestañas -->
+        <div class="tab-header">
+            <button class="tab-link active" onclick="openTab(event, 'tab1')">Carreras</button>
+            <button class="tab-link" onclick="openTab(event, 'tab2')">Jefes De Carrera</button>
+        </div>
+
+        <!-- Contenido de la Pestaña 1: Carreras -->
+        <div id="tab1" class="tab-content active">
+            <div class="container-fluid mt-5">
+                <h2><strong>Carreras</strong></h2>
+                <br />
+                <!-- Botón para añadir nueva carrera -->
+                <button class="btn btn-primary mb-3 w-100" id="addTaskBtn">Añadir Carrera</button>
+
+                <!-- Modal para añadir carrera -->
+                <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="taskModalLabel">Añadir Carrera</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="CareerForm" class="row">
+                                    <input type="hidden" id="id" />
+                                    <div class="col-md-6 mb-3">
+                                        <label for="career_code" class="form-label">Código de Carrera</label>
+                                        <input type="text" class="form-control" id="career_code" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="career_name" class="form-label">Nombre de Carrera</label>
+                                        <input type="text" class="form-control" id="career_name" required />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de carreras -->
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id Carrera</th>
+                                <th>Codigo De Carrera</th>
+                                <th>Nombre De Carrera</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="taskList">
+                            <!-- Aquí se cargarán dinámicamente las carreras -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido de la Pestaña 2: Jefes de Carrera -->
+        <div id="tab2" class="tab-content">
+            <div class="container-fluid mt-5">
+                <h2><strong>Jefes de carrera</strong></h2>
+                <br />
+                <!-- Botón para añadir nuevo jefe de carrera -->
+                <button class="btn btn-primary mb-3 w-100" id="addJefeBtn">Añadir Jefe De Carrera</button>
+
+                <!-- Modal para añadir jefe de carrera -->
+                <div class="modal fade" id="jefeModal" tabindex="-1" aria-labelledby="jefeModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="jefeModalLabel">Añadir Jefe de Carrera</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="JefeForm" class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jefe_rut" class="form-label">Rut</label>
+                                        <input type="text" class="form-control" id="jefe_rut" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jefe_nombres" class="form-label">Nombres</label>
+                                        <input type="text" class="form-control" id="jefe_nombres" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jefe_apellidos" class="form-label">Apellidos</label>
+                                        <input type="text" class="form-control" id="jefe_apellidos" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jefe_fecha_nacimiento" class="form-label">Fecha de
+                                            Nacimiento</label>
+                                        <input type="date" class="form-control" id="jefe_fecha_nacimiento" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jefe_genero" class="form-label">Género</label>
+                                        <select class="form-select" id="jefe_genero" required>
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Femenino</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jefe_email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="jefe_email" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jefe_contrasena" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="jefe_contrasena" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jefe_rol" class="form-label">Rol</label>
+                                        <input type="text" class="form-control" id="jefe_rol" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jefe_carrera_id" class="form-label">ID Carrera</label>
+                                        <input type="text" class="form-control" id="jefe_carrera_id" required />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de jefes de carrera -->
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Rut</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Fecha De Nacimiento</th>
+                                <th>Genero</th>
+                                <th>Email</th>
+                                <th>Contraseña</th>
+                                <th>Rol</th>
+                                <th>Id Carrera</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jefeList">
+                            <!-- Aquí se cargarán dinámicamente los jefes de carrera -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+     <!-- boton para el cierre de sesion-->
+
+    <div class="logout-container">
+        <button class="btn btn-secondary mb-3" id="logoutBtn">
+            Cerrar Sesión
+        </button>
+    </div>
+
+     <!-- importacion de los scripts utilizados por la pagina -->
+
+    <script src="../Scripts/admin/admin-career-heads-manager.js"></script>
+    <script src="../Scripts/admin/admin-career-manager.js"></script>
+    <script src="../Scripts/shared/logout.js"></script>
+    <script src="../Scripts/shared/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio de Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../Styles/login.css" />
+</head>
+
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h1><em><strong>SmartUniversity.com</strong></em></h1>
+    </header>
+    <br>
+    <br>
+    
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="login-form">
+            <h2 class="text-center mb-4"><strong>Iniciar Sesión</strong></h2>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="email" required />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tipo de Usuario</label>
+                    <div>
+                        <label><input type="radio" name="userType" value="admin" checked /> Administrador</label>
+                    </div>
+                    <div>
+                        <label><input type="radio" name="userType" value="career_leader" /> Jefe de Carrera</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+    
+    <footer class="bg-primary text-white mt-5 p-4">
+        <div class="container">
+            <div class="row">
+                <!-- Social Media Section -->
+                <div class="col-md-12">
+                    <h5><strong>Síguenos En:</strong></h5>
+                    <a href="#" class="text-white me-3"><i class="fab fa-facebook-f">Facebook</i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-twitter">Twitter</i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-instagram">Instagram</i></a>
+                    <a href="#" class="text-white"><i class="fab fa-linkedin-in">Linkedin</i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../Scripts/shared/login.js"></script>
+</body>
+
+</html>

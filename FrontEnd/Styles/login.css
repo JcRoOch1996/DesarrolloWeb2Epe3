@@ -1,0 +1,93 @@
+/* Estilo general del cuerpo */
+body {
+  background-image: url("../Images/background1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100vh; /* Asegura que el contenido mínimo ocupe toda la altura */
+  display: flex;
+  flex-direction: column; /* Asegura que el footer esté al final */
+}
+
+/* Estilo del encabezado */
+header {
+  background-color: #007bff; /* Color de fondo del encabezado */
+  color: #ffffff; /* Color del texto */
+  text-align: center; /* Centra el texto */
+  padding: 20px 0; /* Espacio interno arriba y abajo */
+  width: 100%; /* Ancho completo */
+}
+
+/* Estilo del pie de página */
+footer {
+  background-color: #007bff; /* Mismo color que el encabezado */
+  color: #ffffff; /* Color del texto */
+  text-align: center; /* Centra el texto */
+  padding: 20px 0; /* Espacio interno arriba y abajo */
+  width: 100%; /* Ancho completo */
+  margin-top: auto; /* Empuja el footer hacia abajo */
+}
+
+/* Contenedor principal que ocupa al menos el alto de la ventana */
+.container {
+  flex: 1; /* Hace que el contenedor ocupe el espacio restante disponible */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor del formulario de login */
+.login-form {
+  width: 400px; /* Ancho fijo */
+  background-color: #ffffff; /* Fondo blanco para el formulario */
+  padding: 30px; /* Espacio interno alrededor del formulario */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor */
+}
+
+/* Título del formulario */
+h2 {
+  color: #333333; /* Color del texto */
+  margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+/* Campos de entrada */
+.form-control {
+  border-radius: 5px; /* Bordes redondeados en los campos */
+  border: 1px solid #ced4da; /* Color de borde */
+}
+
+/* Botón de envío */
+.btn-primary {
+  background-color: #007bff; /* Color de fondo del botón */
+  border-color: #007bff; /* Color del borde */
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+}
+
+/* Efecto hover en el botón */
+.btn-primary:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el ratón */
+  border-color: #0056b3; /* Color del borde al pasar el ratón */
+}
+
+/* Enlace a la página de registro */
+p a {
+  color: #007bff; /* Color del enlace */
+  text-decoration: none; /* Sin subrayado */
+}
+
+/* Efecto hover en el enlace */
+p a:hover {
+  text-decoration: underline; /* Subrayado al pasar el ratón */
+}
+
+/* Margen superior del mensaje de registro */
+p.mt-3 {
+  margin-top: 20px;
+  color: #555555; /* Color del texto del mensaje */
+  text-align: center;
+}
